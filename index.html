@@ -286,22 +286,26 @@
     }
 
     .res-circle {
-      width: 115px;
-      height: 115px;
-      border-radius: 50%;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
+      gap: 0.55rem;
       margin: 0 auto 1.5rem;
-      transition: background 0.5s;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .res-illust {
+      width: 160px;
+      height: 160px;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 16px rgba(0,0,0,0.13));
     }
 
     .res-kanji {
-      font-size: 3.4rem;
-      color: #fff;
-      font-weight: normal;
+      font-size: 1.6rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
       line-height: 1;
+      transition: color 0.5s;
     }
 
     .res-type-name {
@@ -648,6 +652,7 @@
     <p class="res-eyebrow">あなたの思考タイプは</p>
 
     <div class="res-circle" id="res-circle">
+      <img class="res-illust" id="res-illust" src="" alt="">
       <span class="res-kanji" id="res-kanji"></span>
     </div>
 
@@ -721,7 +726,7 @@
 /* ─── URL設定（公開時にここだけ変更） ─── */
 const APP_URL    = 'https://hinoesuimei.github.io/gokyo/';
 const LINE_ID    = '@884tihkg';
-const FORM_URL   = 'https://hinoesuimei.github.io/shichusuimei/form.html';
+const FORM_URL   = 'https://hinoe-meisiki.netlify.app/form.html';
 
 /* ─── Data ─── */
 const QUESTIONS = [
@@ -746,6 +751,7 @@ const CHOICES = [
 
 const TYPES = {
   木: {
+    img:   "img_木.png",
     kanji: "木",
     label: "木 〜 成長型",
     catch: "未来を育てる、成長の思考",
@@ -756,6 +762,7 @@ const TYPES = {
     teaser: "なぜあなたは、<em>「今」に満足できない</em>のか。\nその答えは、命式に刻まれています。",
   },
   火: {
+    img:   "img_火.png",
     kanji: "火",
     label: "火 〜 情熱型",
     catch: "熱く燃える、情熱の思考",
@@ -766,6 +773,7 @@ const TYPES = {
     teaser: "なぜあなたは、<em>感情が先に動いてしまう</em>のか。\nその根源は、命式に刻まれています。",
   },
   土: {
+    img:   "img_土.png",
     kanji: "土",
     label: "土 〜 調和型",
     catch: "すべてを包む、調和の思考",
@@ -776,6 +784,7 @@ const TYPES = {
     teaser: "なぜあなたは、<em>自分よりも場を優先してしまう</em>のか。\nその理由は、命式に刻まれています。",
   },
   金: {
+    img:   "img_金.png",
     kanji: "金",
     label: "金 〜 洗練型",
     catch: "本質を磨く、洗練の思考",
@@ -786,6 +795,7 @@ const TYPES = {
     teaser: "なぜあなたは、<em>無駄を見ると放っておけない</em>のか。\nその答えは、命式に刻まれています。",
   },
   水: {
+    img:   "img_水.png",
     kanji: "水",
     label: "水 〜 洞察型",
     catch: "深く潜る、洞察の思考",
@@ -873,9 +883,13 @@ function showResult() {
   resultScreen.style.background = t.bg;
   resultScreen.style.setProperty('--type-color', t.color);
 
-  // Circle
-  document.getElementById('res-circle').style.background = t.color;
-  document.getElementById('res-kanji').textContent        = t.kanji;
+  // Illustration + kanji label
+  const illust = document.getElementById('res-illust');
+  illust.src = t.img;
+  illust.alt = t.kanji;
+  const kanjiEl = document.getElementById('res-kanji');
+  kanjiEl.textContent = t.kanji;
+  kanjiEl.style.color = t.color;
 
   // Text
   const nameEl = document.getElementById('res-name');
