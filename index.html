@@ -720,7 +720,7 @@
 <script>
 /* ─── URL設定（公開時にここだけ変更） ─── */
 const APP_URL    = 'https://hinoesuimei.github.io/gokyo/';
-const LINE_ID    = '@xxxxxxxxx';       // ← LINE公式アカウントID
+const LINE_ID    = '@884tihkg';
 const FORM_URL   = 'https://hinoesuimei.github.io/shichusuimei/form.html';
 
 /* ─── Data ─── */
@@ -899,12 +899,9 @@ function showResult() {
   // Teaser copy
   document.getElementById('res-teaser').innerHTML = t.teaser.replace('\n', '<br>');
 
-  // LINEで命式を無料鑑定ボタン：フォームへ診断タイプを引き継ぐ
-  const formParams = new URLSearchParams({
-    type:  topKey,   // 例: 水
-    label: t.label,  // 例: 水 〜 洞察型
-  });
-  document.getElementById('btn-course').href = `${FORM_URL}?${formParams.toString()}`;
+  // LINEで命式を無料鑑定ボタン：LINEへ直接誘導
+  document.getElementById('btn-course').href =
+    `https://line.me/R/ti/p/${encodeURIComponent(LINE_ID)}`;
 
   show('screen-result');
 }
