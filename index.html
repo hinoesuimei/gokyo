@@ -13,14 +13,14 @@
 
   <!-- OGP -->
   <meta property="og:type"        content="website">
-  <meta property="og:url"         content="https://your-domain.com">
+  <meta property="og:url"         content="https://hinoesuimei.github.io/gokyo/">
   <meta property="og:title"       content="五行思考タイプ診断">
   <meta property="og:description" content="木・火・土・金・水、あなたの思考タイプはどれ？10問で診断します。">
-  <meta property="og:image"       content="https://your-domain.com/ogp.png">
+  <meta property="og:image"       content="https://hinoesuimei.github.io/gokyo/ogp.png">
   <meta name="twitter:card"       content="summary_large_image">
   <meta name="twitter:title"      content="五行思考タイプ診断">
   <meta name="twitter:description" content="木・火・土・金・水、あなたの思考タイプはどれ？10問で診断します。">
-  <meta name="twitter:image"      content="https://your-domain.com/ogp.png">
+  <meta name="twitter:image"      content="https://hinoesuimei.github.io/gokyo/ogp.png">
   <style>
     *, *::before, *::after {
       margin: 0;
@@ -580,6 +580,95 @@
 
     .anim { animation: fadeUp 0.38s ease both; }
 
+    /* ── Deep Reveal ── */
+    #deep-reveal {
+      display: none;
+      width: 100%;
+      max-width: 460px;
+      margin-top: 2rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    #deep-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-inner {
+      position: relative;
+      background: linear-gradient(160deg, #fffef9 0%, #fdf6e8 100%);
+      border-top:    1px solid #c9a84c;
+      border-bottom: 1px solid #c9a84c;
+      border-left:   1px solid rgba(201,168,76,0.3);
+      border-right:  1px solid rgba(201,168,76,0.3);
+      border-radius: 6px;
+      padding: 2.4rem 2rem 2.2rem;
+      box-shadow: 0 6px 32px rgba(180,145,50,0.10);
+      text-align: center;
+    }
+    .reveal-ornament {
+      font-size: 0.66rem;
+      letter-spacing: 0.5em;
+      color: #b8943e;
+      margin-bottom: 1.5rem;
+      font-weight: 400;
+    }
+    .reveal-text {
+      font-size: 0.92rem;
+      line-height: 2.3;
+      color: #5a4a38;
+      letter-spacing: 0.07em;
+      text-align: left;
+    }
+    .reveal-text .reveal-gap {
+      display: block;
+      margin-top: 1em;
+    }
+    .reveal-divider {
+      width: 36px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+      margin: 1.6rem auto 1.8rem;
+    }
+    .btn-taiken {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, #c9a84c 0%, #e8c86e 50%, #c9a84c 100%);
+      background-size: 200% auto;
+      color: #fff;
+      text-decoration: none;
+      padding: 0.95rem 2.8rem;
+      font-size: 0.9rem;
+      font-family: inherit;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      border-radius: 50px;
+      border: none;
+      box-shadow: 0 4px 20px rgba(180,140,40,0.38), inset 0 1px 0 rgba(255,255,255,0.3);
+      transition: background-position 0.4s, transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+    .btn-taiken:hover {
+      background-position: right center;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 26px rgba(180,140,40,0.45), inset 0 1px 0 rgba(255,255,255,0.3);
+    }
+    .btn-taiken-arrow {
+      font-size: 0.8rem;
+      opacity: 0.85;
+      letter-spacing: 0;
+      transition: transform 0.2s;
+    }
+    .btn-taiken:hover .btn-taiken-arrow { transform: translateX(3px); }
+    .reveal-note {
+      font-size: 0.72rem;
+      color: #b8943e;
+      letter-spacing: 0.12em;
+      margin-top: 1rem;
+      opacity: 0.8;
+    }
+
     @media (max-width: 420px) {
       .main-title { font-size: 1.55rem; }
       .el-badge   { width: 36px; height: 36px; font-size: 0.9rem; }
@@ -697,9 +786,32 @@
       思考タイプの根底にある命式から、<br>
       本来の自分と人生の流れが見えてきます。
     </p>
-    <a id="btn-course" href="https://example.com" class="btn-suimei" target="_blank" rel="noopener noreferrer">
-      LINEで命式を無料鑑定<span class="btn-suimei-arrow">›</span>
-    </a>
+    <button id="btn-course" class="btn-suimei" onclick="showDeepReveal()">
+      四柱推命でもっと深く知る<span class="btn-suimei-arrow">›</span>
+    </button>
+  </div>
+
+  <!-- ── Deep Reveal ── -->
+  <div id="deep-reveal">
+    <div class="reveal-inner">
+      <p class="reveal-ornament">— 命式が教えてくれること —</p>
+      <p class="reveal-text">
+        五行タイプは、あなたの思考の「傾向」です。<br><br>
+        <span class="reveal-gap">でも、なぜあなたがそうなのか——<br>
+        その答えは、五行の外にあります。</span>
+        <span class="reveal-gap">生まれた日に刻まれた命式には、<br>
+        思考の癖だけでなく、<br>
+        才能・人間関係・人生の流れまで<br>
+        すべてが書かれています。</span>
+        <span class="reveal-gap">五行診断で感じた「そうかもしれない」は、<br>
+        命式を読むと「やっぱりそうだった」に変わります。</span>
+      </p>
+      <div class="reveal-divider"></div>
+      <a href="https://forms.gle/dWuSD6jyPUMCbo9D8" class="btn-taiken" target="_blank" rel="noopener noreferrer">
+        体験してみる<span class="btn-taiken-arrow">›</span>
+      </a>
+      <p class="reveal-note">四柱推命入門講座・お申し込みフォーム</p>
+    </div>
   </div>
 
   <div class="actions">
@@ -913,13 +1025,27 @@ function showResult() {
   // Teaser copy
   document.getElementById('res-teaser').innerHTML = t.teaser.replace('\n', '<br>');
 
-  // LINEで命式を無料鑑定ボタン：LINEへ直接誘導
-  document.getElementById('btn-course').href =
-    `https://line.me/R/ti/p/${encodeURIComponent(LINE_ID)}`;
+  // リセット：ディープリビールを非表示に戻す
+  const reveal = document.getElementById('deep-reveal');
+  reveal.style.display = 'none';
+  reveal.classList.remove('visible');
+  document.getElementById('btn-course').style.display = '';
 
   show('screen-result');
 }
 
+
+/* ─── Deep Reveal ─── */
+function showDeepReveal() {
+  const reveal = document.getElementById('deep-reveal');
+  const btn    = document.getElementById('btn-course');
+  btn.style.display = 'none';
+  reveal.style.display = 'block';
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    reveal.classList.add('visible');
+    reveal.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }));
+}
 
 /* ─── Reset ─── */
 function resetQuiz() {
