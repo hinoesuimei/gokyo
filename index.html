@@ -463,6 +463,20 @@
       color: #fff;
     }
 
+    .btn-back-line {
+      background: none;
+      border: none;
+      color: var(--text-sub);
+      font-size: 0.78rem;
+      font-family: inherit;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      padding: 0.4rem 0;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .btn-back-line:hover { opacity: 1; }
+
     /* ── 四柱推命バナー ── */
     .suimei-banner {
       position: relative;
@@ -829,6 +843,7 @@
       Instagram はこちら
     </a>
     <button class="btn-retry" onclick="resetQuiz()">もう一度診断する</button>
+    <button class="btn-back-line" onclick="window.close()">← LINEに戻る</button>
   </div>
 
 </section>
