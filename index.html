@@ -843,7 +843,7 @@
       Instagram はこちら
     </a>
     <button class="btn-retry" onclick="resetQuiz()">もう一度診断する</button>
-    <a class="btn-back-line" href="https://line.me/R/ti/p/%40884tihkg">← LINEへ</a>
+    <button class="btn-back-line" onclick="goToLine()">← LINEへ</button>
   </div>
 
 </section>
@@ -1049,6 +1049,14 @@ function showResult() {
   show('screen-result');
 }
 
+
+/* ─── LINEへ ─── */
+function goToLine() {
+  window.close();
+  setTimeout(function() {
+    window.location.href = 'line://nv/chatList';
+  }, 300);
+}
 
 /* ─── Deep Reveal ─── */
 function showDeepReveal() {
